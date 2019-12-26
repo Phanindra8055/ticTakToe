@@ -38,42 +38,33 @@ selected_moves = []
 print_board(board)
 turn = 'X'
 i = 0
+
 while True:
+    
     print(f'Turn for {turn}. Move on which space?')
     move = input()
     while len(move) == 0:
         move = input()
+        
     if move in selected_moves:
         print("{} already selected.".format(move))
         continue
+        
     board[move] = turn
     print_board(board)
     selected_moves.append(move)
+    
     if turn == 'X':
         if is_winner(board, turn):
             print("{} wins.".format(turn))
             break
-        '''((board['1'] == board['2'] == board['3'] == 'X') or
-            (board['4'] == board['5'] == board['6'] == 'X') or
-            (board['7'] == board['8'] == board['9'] == 'X') or
-            (board['1'] == board['2'] == board['3'] == 'X') or
-            (board['4'] == board['5'] == board['6'] == 'X') or
-            (board['7'] == board['8'] == board['9'] == 'X') or
-            (board['1'] == board['5'] == board['9'] == 'X') or
-            (board['3'] == board['5'] == board['7'] == 'X')):'''
         turn = 'O'
     else:
-        if ((board['1'] == board['2'] == board['3'] == 'O') or
-            (board['4'] == board['5'] == board['6'] == 'O') or
-            (board['7'] == board['8'] == board['9'] == 'O') or
-            (board['1'] == board['2'] == board['3'] == 'O') or
-            (board['4'] == board['5'] == board['6'] == 'O') or
-            (board['7'] == board['8'] == board['9'] == 'O') or
-            (board['1'] == board['5'] == board['9'] == 'O') or
-            (board['3'] == board['5'] == board['7'] == 'O')):
+        if is_winner(board, turn):
             print("{} wins.".format(turn))
             break
         turn = 'X'
+        
     if len(selected_moves) == 9:
         print("Game's Draw")
         break
